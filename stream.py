@@ -30,7 +30,7 @@ if __name__ == "__main__":
     py_rdd = kinesis_stream.map(lambda x: json.loads(x))
 
     def process(time, rdd):
-        print("========= %s =========" % str(time))
+        print(f"========= {str(time)} =========")
         try:
 
             sqlContext = getSqlContextInstance(rdd.context)
@@ -52,7 +52,6 @@ if __name__ == "__main__":
                 .save()
         except Exception as e:
             print(e)
-            pass
 
 
     py_rdd.foreachRDD(process)
